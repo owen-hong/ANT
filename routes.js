@@ -3,6 +3,7 @@
  */
 
 var Home = require('./controllers/index');
+var Passport = require('./controllers/passport');
 
 
 exports.handle = function (app) {
@@ -11,18 +12,13 @@ exports.handle = function (app) {
     app.get('/newUser', Home.registerUser);
 
 
+    app.get('/login', Passport.login);
 
-    app.get('/login', Home.login);
-    app.get('/admin/login', Home.loginSuccess);
-
-    app.post('/doLogin', Home.doLogin);
-
+    app.get('/loginSuccess', Passport.loginSuccess);
+    app.post('/doLogin', Passport.doLogin);
 
 
-
-
-
-
+    app.get('/code', Home.code);
 
 
 

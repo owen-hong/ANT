@@ -10,10 +10,12 @@ var Routes = require('./routes.js');
 var config   = require('./config.js');
 
 
-//登录模块
-var passport = require('passport'),
-    LocalStrategy = require('passport-local').Strategy;
+var session = require('express-session');
+var RedisStore = require('connect-redis')(session);
 
+//鐧诲綍妯″潡
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
 
 var app = express();
 
@@ -21,7 +23,7 @@ var app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 
-// 更改模板引擎
+// 鏇存敼妯℃澘寮曟搸
 app.engine('.html', require('ejs').__express);
 app.set('view engine', 'html');
 
@@ -32,16 +34,20 @@ app.use(logger('dev'));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
+app.use(cookieParser(config.session_secret));
 
-app.use(require('express-session')({
-  secret: config.secret,
-  resave: false,
-  saveUninitialized: false
+app.use(session({
+    secret: config.session_secret,
+    store: new RedisStore({
+        port: config.redis_port,
+        host: config.redis_host
+    }),
+    resave: false,
+    saveUninitialized: false
 }));
 
 
-//启动passport登录组件
+//鍚姩passport鐧诲綍缁勪欢
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -49,7 +55,7 @@ app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'public')));
 
 
-//启动路由中心
+//鍚姩璺敱涓績
 Routes.handle(app);
 
 
@@ -88,12 +94,12 @@ app.use(function(err, req, res, next) {
 
 /*
  *
- * 启动服务
+ * 鍚姩鏈嶅姟
  *
  * */
 
 
-//设置端口
+//璁剧疆绔彛
 app.set('port', config.port);
 
 app.listen(app.get('port'),function(){

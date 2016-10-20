@@ -19,6 +19,10 @@ var ModelSchema = new Schema({
         type: String,
         default: 'my user'
     },
+    amount:{
+        type:Number,
+        default: 0
+    },
     created: {
         type: Date,
         default: Date.now

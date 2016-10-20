@@ -10,14 +10,14 @@ var OneSelf    = models.User;
 //查询指定id
 exports.findOne = function (id, callback) {
     OneSelf
-        .findOne({_id: id})
+        .find({phone: id})
         .exec(callback);
 }
 
 //查询指定name
 exports.findName = function (name, callback) {
     OneSelf
-        .find({name: name})
+        .findOne({name: name})
         .sort('created')
         .exec(callback);
 }

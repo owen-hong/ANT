@@ -4,110 +4,121 @@
 
 'use strict';
 
-var passport = require('passport'),
-    LocalStrategy = require('passport-local').Strategy;
-
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
 
 var User = require('../proxy/user.js');
 
 
 
-//µÇÂ¼Ä£¿é
+//ç™»å½•æ¨¡å—
 passport.use('local', new LocalStrategy(
     function (username, password, done) {
-
-        var Pass = password;
-
-        console.log('Pass');
+        console.log('user');
         console.log(username);
-        console.log(Pass);
-
+        console.log(password);
 
         User.findOne(username,function(err,posts){
+            if (err) { return done(err); }
 
-            if(err){
-                return res.send(err);
+            if (!posts[0]) {
+                console.log('Incorrect username');
+                return done(null, false);
             }
 
-            if(posts=="" || posts==null){
-                return done(null, false, { message: 'Incorrect username.' });
+            if (password !== posts[0].password) {
+                console.log('Incorrect password');
+                return done(null, false);
             }
 
-            if (Pass !== posts.password) {
-                return done(null, false, { message: 'Incorrect password.' });
-            }
+            console.log('result::');
+            console.log(posts[0].phone);
 
-            return done(null, posts.username);
+            return done(null, posts[0].phone);
 
         });
     }
 ));
 
-//±£´æuser¶ÔÏó
+
+//ä¿å­˜userå¯¹è±¡
 passport.serializeUser(function (user, done) {
-    done(null, user);//¿ÉÒÔÍ¨¹ıÊı¾İ¿â·½Ê½²Ù×÷
+    console.log('serializeUser');
+    console.log(user);
+    done(null, user);//å¯ä»¥é€šè¿‡æ•°æ®åº“æ–¹å¼æ“ä½œ
 });
 
-//É¾³ıuser¶ÔÏó
+//åˆ é™¤userå¯¹è±¡
 passport.deserializeUser(function (user, done) {
-    done(null, user);//¿ÉÒÔÍ¨¹ıÊı¾İ¿â·½Ê½²Ù×÷
+    console.log('deserializeUser');
+    console.log(user);
+    done(null, user);//å¯ä»¥é€šè¿‡æ•°æ®åº“æ–¹å¼æ“ä½œ
 });
 
 
 
-//µÇÂ¼ºóÌø×ª
+//ç™»å½•åè·³è½¬
 exports.doLogin = passport.authenticate('local', {
-    successRedirect: '/admin/login',
-    failureRedirect: '/login',
-    failureFlash: true
+    successRedirect: '/loginSuccess',
+    failureRedirect: '/login'
 });
+
+
 
 exports.login = function(req, res) {
+
+    console.log('login');
+    console.log(req.isAuthenticated());
+
     res.render('login',{
-        title:'µÇÂ¼'
+        title:'ç™»å½•'
     });
 };
 
 
 exports.loginSuccess = function(req, res) {
+    console.log('loginSuccess');
+    console.log(req.isAuthenticated());
     res.render('index',{
-        title:'µÇÂ¼³É¹¦'
+        title:'ç™»å½•æˆåŠŸ'
     });
-})
-
-
-
-//ÍË³ö
-exports.logout = function(req, res) {
-    req.logout();
-    res.redirect('/admin/login');
 };
 
-//ÑéÖ¤ÊÇ·ñÒÑµÇÂ¼,µÇÂ¼Ö±½ÓÌø×ªµ½adminÊ×Ò³
+
+
+//é€€å‡º
+exports.logout = function(req, res) {
+    req.logout();
+    res.redirect('/login');
+};
+
+//éªŒè¯æ˜¯å¦å·²ç™»å½•,ç™»å½•ç›´æ¥è·³è½¬åˆ°adminé¦–é¡µ
 exports.checkNotLogin = function(req,res,next){
     if(req.isAuthenticated()){
-        req.flash('error','ÒÑµÇÂ¼');
-        return res.redirect('/admin');
+        console.log('å·²ç™»å½•');
+        return res.redirect('/admin/login');
     }
     next();
 }
 
-//ÑéÖ¤ÊÇ·ñµÇÂ¼
+//éªŒè¯æ˜¯å¦ç™»å½•
 exports.isLoggedIn = function(req, res, next) {
+
+    console.log('req.isAuthenticated');
+    console.log(req.isAuthenticated());
+
     if (req.isAuthenticated()){
-        Passport.findUser(req.user,function(err,data){
+        Passport.findOne(req.user,function(err,data){
             if(err){
                 return res.send(err);
             }
 
-            req.session.icon = data.icon;
-            req.session.userId = data._id;
-            req.session.userName = data.username;
+            console.log(data);
         });
 
         return next();
     }else{
-        res.redirect('/admin/login');
+        res.redirect('/login');
     }
 }
 

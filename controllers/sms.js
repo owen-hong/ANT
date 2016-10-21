@@ -6,20 +6,26 @@ var TopClient = require('./topClient').TopClient;
 
 var client = new TopClient({
     'appkey': '23488432',
-    'appsecret':'e3e204fb11edb3afa5bc4392ee0796c1',
+    'appsecret':'e3e204fb11edb3afa5bc4392ee0796c6',
     'REST_URL': 'http://gw.api.taobao.com/router/rest'
 });
 
 client.execute('alibaba.aliqin.fc.sms.num.send', {
     'extend': '123456',
     'sms_type': 'normal',
-    'sms_free_sign_name':'520UED«∞∂À',
-    'sms_param': '{\"name\":\"≈∑Œƒ\",\"code\":\"5201314\",\"time\":\"5\"}',
+    'sms_free_sign_name':'520UEDÂâçÁ´Ø',
+    'sms_param': '{\"name\":\"Ê¨ßÊñá\",\"code\":\"5201314\",\"time\":\"5\"}',
     'rec_num': '18820183227',
     'sms_template_code': 'SMS_19565021'
 }, function (error, response) {
-    if (!error) console.log(response);
-    else console.log(error);
+    if (!error) {
+        console.log(response.result.model);
+        console.log(response.result.success);
+
+    }
+    else {
+        console.log(error);
+    }
 });
 
 

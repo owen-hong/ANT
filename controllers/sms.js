@@ -6,7 +6,7 @@ var TopClient = require('./topClient').TopClient;
 
 var client = new TopClient({
     'appkey': '23488432',
-    'appsecret':'e3e204fb11edb3afa5bc4392ee0796c6',
+    'appsecret':'e3e204fb11edb3afa5bc4392ee0796c1',
     'REST_URL': 'http://gw.api.taobao.com/router/rest'
 });
 
@@ -22,8 +22,8 @@ client.execute('alibaba.aliqin.fc.sms.num.send', {
         console.log(response.result.model);
         console.log(response.result.success);
 
-    }
-    else {
+    } else {
+        console.log(response);
         console.log(error);
     }
 });

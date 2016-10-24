@@ -15,9 +15,13 @@ var RedisStore = require('connect-redis')(session);
 
 //登录模块
 var passport = require('passport');
-var LocalStrategy = require('passport-local').Strategy;
+//var LocalStrategy = require('passport-local').Strategy;
 
 var app = express();
+
+
+
+
 
 
 // view engine setup
@@ -36,6 +40,10 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser(config.session_secret));
 
+////设置全局时间控件
+app.locals.moment = require('moment');
+
+
 app.use(session({
     secret: config.session_secret,
     store: new RedisStore({
@@ -51,8 +59,8 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-
 app.use(express.static(path.join(__dirname, 'public')));
+
 
 
 //启动路由中心

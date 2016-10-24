@@ -1,0 +1,67 @@
+<% include header.html %>
+<div class="widget-box">
+    <div class="widget-title">
+        <span class="icon"> 
+            <i class="icon-th"></i> 
+        </span>
+        <h5>文章列表</h5>
+    </div>
+    <div class="widget-content nopadding">
+        <table class="table table-bordered table-striped with-check">
+            <thead>
+                <tr>
+                    <th>
+                        <i class="icon-resize-vertical"></i>
+                    </th>
+                    <th>手机号码</th>
+                    <th>所属分类</th>
+                    <th>渠道号</th>
+                    <th>投资金额</th>
+                    <th>注册时间</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% if(posts!=="") { %>
+                    <% posts.forEach(function(post, index) { %>
+                    <tr>
+                        <td>
+                            <%= index +1 %>
+                        </td>
+                        <td>
+                            <%= post.phone %>
+                        </td>
+                        <td>
+                            <%= post.activeType %>
+                        </td>
+                        <td>
+                            <%= post.channelId %>
+                        </td>
+                        <td>
+                            <%= post.amount %>
+                        </td>
+                        <td>
+                            <%= locals.moment(post.created).format("YYYY-MM-DD h:mm a") %>
+                        </td>
+                    </tr>
+                    <% }) %>
+                <% }else{ %>
+                    <tr>
+                        <td colspan="7">
+                            暂无数据
+                        </td>
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>
+    </div>
+    <!-- 分页 -->
+    <div class="dataTables_wrapper">
+        <div class="fg-toolbar ui-toolbar ui-widget-header ui-corner-bl ui-corner-br ui-helper-clearfix" id="pager">
+            <!-- 分页内容 -->
+        </div>
+    </div>
+</div>
+
+<script src="js/jquery.pager.js"></script>
+
+<% include footer.html %>

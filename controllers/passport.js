@@ -2,23 +2,24 @@
  * Created by owenhong on 2016/10/19.
  */
 
-'use strict';
-
+var crypto = require('crypto');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 
 var User = require('../proxy/user.js');
 
 
-
-//登录模块
-passport.use('local', new LocalStrategy(
-    function (username, password, done) {
+////登录模块
+passport.use('local',
+    new LocalStrategy(function (username, password, done) {
         console.log('user');
         console.log(username);
         console.log(password);
 
-        User.findOne(username,function(err,posts){
+        var md5 = crypto.createHash('md5');
+        var Pass = md5.update(password).digest('base64');
+
+        User.findPhone(username,function(err,posts){
             if (err) { return done(err); }
 
             if (!posts[0]) {
@@ -26,20 +27,17 @@ passport.use('local', new LocalStrategy(
                 return done(null, false);
             }
 
-            if (password !== posts[0].password) {
+
+            if (Pass !== posts[0].password) {
                 console.log('Incorrect password');
                 return done(null, false);
             }
-
-            console.log('result::');
-            console.log(posts[0].phone);
 
             return done(null, posts[0].phone);
 
         });
     }
 ));
-
 
 //保存user对象
 passport.serializeUser(function (user, done) {
@@ -58,16 +56,14 @@ passport.deserializeUser(function (user, done) {
 
 
 //登录后跳转
-exports.doLogin = passport.authenticate('local', {
+exports.doLogin = passport.authenticate('local',{
     successRedirect: '/loginSuccess',
     failureRedirect: '/login'
 });
 
 
-
 exports.login = function(req, res) {
-
-    console.log('login');
+    console.log('login in');
     console.log(req.isAuthenticated());
 
     res.render('login',{
@@ -108,13 +104,10 @@ exports.isLoggedIn = function(req, res, next) {
     console.log(req.isAuthenticated());
 
     if (req.isAuthenticated()){
-        Passport.findOne(req.user,function(err,data){
-            if(err){
-                return res.send(err);
-            }
 
-            console.log(data);
-        });
+        console.log('已登录...');
+        console.log(req.user);
+
 
         return next();
     }else{

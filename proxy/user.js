@@ -7,12 +7,22 @@
 var models  = require('../models');
 var OneSelf    = models.User;
 
-//查询指定id
-exports.findOne = function (id, callback) {
+//查询all
+exports.findAll = function (callback) {
     OneSelf
-        .find({phone: id})
+        .find()
+        .sort('-created')
         .exec(callback);
 }
+
+//查询指定id
+exports.findPhone = function (phone, callback) {
+    OneSelf
+        .find({phone: phone})
+        .exec(callback);
+}
+
+
 
 //查询指定name
 exports.findName = function (name, callback) {
@@ -33,6 +43,8 @@ exports.newAndSave = function (data, callback) {
     self.password        = data.password;
     self.activeType      = data.activeType;
     self.channelId       = data.channelId;
+    self.amount          = data.amount;
+    self.weight          = data.weight;
 
     self.save(callback);
 };

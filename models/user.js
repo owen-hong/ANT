@@ -11,17 +11,25 @@ var ModelSchema = new Schema({
     name: String,
     phone: {
         type: String,
-        //unique: true
+        unique: true,
+        required: true
     },
-    password:String,
+    password:{
+        type: String,
+        required: true
+    },
     activeType:String,
     channelId: {
         type: String,
-        default: 'my user'
+        default: 'ANT-User'
     },
     amount:{
         type:Number,
         default: 0
+    },
+    weight:{
+        type: String,
+        default: '2'
     },
     created: {
         type: Date,

@@ -2,11 +2,11 @@
  * Created by owenhong on 2016/10/20.
  */
 
-var TopClient = require('./topClient').TopClient;
+var TopClient = require('ali-top-sdk').TopClient;
 
 var client = new TopClient({
     'appkey': '23488432',
-    'appsecret':'e3e204fb11edb3afa5bc4392ee0796c1',
+    'appsecret':'e3e204fb11edb3afa5bc4392ee0796c6',
     'REST_URL': 'http://gw.api.taobao.com/router/rest'
 });
 
@@ -19,6 +19,7 @@ client.execute('alibaba.aliqin.fc.sms.num.send', {
     'sms_template_code': 'SMS_19565021'
 }, function (error, response) {
     if (!error) {
+        console.log(response);
         console.log(response.result.model);
         console.log(response.result.success);
 

@@ -14,6 +14,7 @@ exports.handle = function (app) {
     app.get('/isLoggedIn', Passport.isLoggedIn);
     app.get('/login', Passport.login);
     app.get('/logout', Passport.logout);
+    app.get('/authCode', Passport.authCode);
 
 
 
@@ -25,7 +26,8 @@ exports.handle = function (app) {
 
     app.post('/doLogin', Passport.doLogin);
 
-    //app.get('/code', Home.code);
+
+
 
 
 

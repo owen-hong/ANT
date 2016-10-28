@@ -15,7 +15,6 @@ var RedisStore = require('connect-redis')(session);
 
 //登录模块
 var passport = require('passport');
-//var LocalStrategy = require('passport-local').Strategy;
 
 var app = express();
 

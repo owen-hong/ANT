@@ -8,7 +8,6 @@ var LocalStrategy = require('passport-local').Strategy;
 
 var User = require('../proxy/user.js');
 
-
 ////登录模块
 passport.use('local',
     new LocalStrategy(function (username, password, done) {
@@ -116,9 +115,39 @@ exports.isLoggedIn = function(req, res, next) {
 }
 
 
+var AliSms = require('./sms.js');
+//验证码
+exports.authCode = function(req, res) {
+    var regx = /^(13|15|17|18|14)[0-9]{9}$/;
+    var phone = req.query.phone;
+
+    if(phone.match(regx)){
+        console.log('yes');
+
+        var config = {
+            phone:phone
+        }
+
+        AliSms.sendCode(config,function(data){
+            console.log(data);
+
+            res.json({
+                success:true
+            })
+        })
 
 
 
 
+    }else{
+        console.log("no");
+        res.json({
+            success:false,
+            message:'请填写正确的手机号码!!'
+        })
+    }
+
+
+}
 
 

@@ -6,6 +6,13 @@ var logger = require('morgan');
 
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var methodOverride = require('method-override');
+var multipart = require('connect-multiparty');
+
+//CSRF防攻击
+var csurf = require('csurf');
+
+
 var Routes = require('./routes.js');
 var config   = require('./config.js');
 
@@ -35,9 +42,21 @@ app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 
 
-app.use(bodyParser.json());
+//TODO parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
+
+//TODO parse application/json
+app.use(bodyParser.json());
+
+//TODO 4.0 method-override
+app.use(methodOverride());
+
+//TODO connect-multiparty
+app.use(multipart());
+
+
 app.use(cookieParser(config.session_secret));
+
 
 ////设置全局时间控件
 app.locals.moment = require('moment');
@@ -61,6 +80,14 @@ app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'public')));
 
 
+//开启csrf防攻击
+app.use(csurf({ cookie: true }));
+
+app.use(function (req, res, next) {
+    res.locals.csrf = req.csrfToken ? req.csrfToken() : '';
+    res.locals.user = req.session.user;
+    next();
+});
 
 //启动路由中心
 Routes.handle(app);

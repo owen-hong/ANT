@@ -122,23 +122,47 @@ exports.authCode = function(req, res) {
     var phone = req.query.phone;
 
     if(phone.match(regx)){
-        console.log('yes');
 
-        var config = {
-            phone:phone
-        }
+        User.findPhone(phone,function(err,results) {
+            if(err){
+                res.json({
+                    success:false,
+                    message:'验证码系统开小差啦，请稍后重试'
+                });
+                return false;
+            }
 
-        AliSms.sendCode(config,function(data){
-            console.log(data);
+            if(results.length <= 0){
+                var config = {
+                    phone:phone
+                }
+                AliSms.sendCode(config,function(data){
+                    console.log(data);
 
-            res.json({
-                success:true
-            })
-        })
-
-
-
-
+                    if(data.success === true && data.repeat === false){
+                        res.json({
+                            success:true,
+                            message:'发送成功'
+                        })
+                    }else if(data.repeat === true){
+                        res.json({
+                            success:false,
+                            message:'一分钟内请勿重复发送验证码'
+                        })
+                    }else{
+                        res.json({
+                            success:false,
+                            message:'验证码系统开小差啦，请稍后重试'
+                        })
+                    }
+                });
+            }else{
+                res.json({
+                    success:false,
+                    message:'该手机号码已被注册'
+                });
+            }
+        });
     }else{
         console.log("no");
         res.json({
@@ -146,8 +170,6 @@ exports.authCode = function(req, res) {
             message:'请填写正确的手机号码!!'
         })
     }
-
-
 }
 
 

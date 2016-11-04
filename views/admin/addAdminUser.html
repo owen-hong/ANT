@@ -1,0 +1,41 @@
+<% include header.html %>
+<div class="row-fluid">
+    <div class="span12">
+        <div class="widget-box">
+            <div class="widget-title">
+				<span class="icon">
+					<i class="icon-align-justify"></i>
+				</span>
+                <h5><%= title %></h5>
+            </div>
+            <div class="widget-content nopadding">
+                <form action="/admin/doAddAdminUser" method="post" class="form-horizontal">
+                    <div class="control-group">
+                        <label class="control-label">渠道商名称 :</label>
+                        <div class="controls">
+                            <input type="text" name="userName" class="span3" placeholder="" />
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">渠道号 :</label>
+                        <div class="controls">
+                            <input type="text" name="channelId" class="span3" placeholder="" />
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">密码 :</label>
+                        <div class="controls">
+                            <input type="password" name="password" class="span3" placeholder="" />
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <input type='hidden' name='_csrf' value='<%= csrf %>'/>
+                        <input type='hidden' name='_csrf' value='<%= csrf %>'/>
+                        <button type="submit" class="btn btn-success">保存</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<% include footer.html %>

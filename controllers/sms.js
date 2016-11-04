@@ -12,7 +12,7 @@ exports.sendCode = function(Config,callback){
 
     var tel = Config.phone;
     var param = '{\"name\":\"欧文\",\"code\":\"'+ code +'\",\"time\":\"1\"}';
-    var validTime = 60;
+    var validTime = 6000; //设置验证码有效时间
     var phoneId = "register:" + tel;
 
     var client = new TopClient({
@@ -50,7 +50,7 @@ exports.sendCode = function(Config,callback){
                     callback({
                         success:false,
                         repeat:false,
-                        message:'系统错误请稍后重试'
+                        message:'验证码系统开小差啦，请稍后重试'
                     });
                 } else {
                     if(response.result.success){
@@ -66,9 +66,9 @@ exports.sendCode = function(Config,callback){
                                         message:err.message
                                     });
                                 }else{
-                                    console.log('ok');
                                     callback({
                                         success:true,
+                                        repeat:false,
                                         message:'发送成功...'
                                     });
                                 }

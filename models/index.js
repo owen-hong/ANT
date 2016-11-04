@@ -8,7 +8,7 @@ var mongoose = require('mongoose');
 var config   = require('../config');
 var logger = require('../common/logger');
 
-mongoose.Promise = require('bluebird'); //·ÀÖ¹ES6Óï·¨³öÏÖ¾¯¸æ
+mongoose.Promise = require('bluebird'); //ï¿½ï¿½Ö¹ES6ï¿½ï·¨ï¿½ï¿½ï¿½Ö¾ï¿½ï¿½ï¿½
 mongoose.connect(config.db, {
     server: {poolSize: 20}
 }, function (err) {
@@ -22,5 +22,7 @@ mongoose.connect(config.db, {
 
 // models
 require('./user');
+require('./adminUser');
 
 exports.User = mongoose.model('User');
+exports.adminUser = mongoose.model('adminUser');

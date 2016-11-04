@@ -14,6 +14,8 @@ exports.handle = function (app) {
     app.get('/isLoggedIn', Passport.isLoggedIn);
     app.get('/login', Passport.login);
     app.get('/logout', Passport.logout);
+
+    //发送验证码
     app.get('/authCode', Passport.authCode);
 
 
@@ -30,11 +32,12 @@ exports.handle = function (app) {
 
 
 
-
-
-
-
     app.get('/admin', Admin.index);
+    app.get('/admin/login', Admin.login);
+
+
+    app.get('/admin/addAdminUser', Admin.addAdminUser);
+    app.post('/admin/doAddAdminUser', Admin.doAddAdminUser);
 
 
 

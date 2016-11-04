@@ -30,6 +30,8 @@ exports.index = function(req,res){
     //    });
 
 
+
+
     User.findName('Ant-Man',function(err,data){
         if(err){
             console.log(err);
@@ -37,9 +39,10 @@ exports.index = function(req,res){
             return;
         }
         console.log('success...');
-        res.json(data);
+        res.send(data);
     })
 };
+
 
 exports.code = function(req,res){
     var tel = '18820183227';
@@ -66,35 +69,117 @@ exports.registerUser = function(req,res){
 exports.doRegisterUser = function(req,res){
     var md5 = crypto.createHash('md5');
 
-    console.log(req.body.phone);
-    console.log(req.body.password);
 
-    var name = req.body.name ||'Ant-Man';
-    var phone = req.body.phone;
-    var password = md5.update(req.body.password).digest('base64');
-    var activeType = req.body.activeType || 'ANT';
-    var channelId = req.body.channelId || 'ANT-User';
+    var phone = req.body.phone.trim();
+    var password = req.body.password.trim();
+    var authCode = req.body.authCode.trim();
 
-    var userData = {
-        name: name ,
-        phone: phone,
-        password: password,
-        activeType: activeType,
-        channelId: channelId,
-        //weight: '0'
-    };
-    console.log(userData);
+    var regx = /^(13|15|17|18|14)[0-9]{9}$/;
+    var passwordRegx = /^(\w){6,20}$/;
+    var authCodeRegx =/^[0-9]{4}$/;
 
 
-    User.newAndSave(userData,function(err,data){
-        if(err){
-            console.log(err);
-            res.send(err.message);
-            return;
+    if(!phone.match(regx)){
+        res.json({
+            status:false,
+            message:'请填写正确的手机号码'
+        });
+        return false;
+    }
+    if(!password.match(passwordRegx)){
+        res.json({
+            status:false,
+            message:'请输入6-20个字母、数字、下划线密码'
+        });
+        return false;
+    }
+    if(!authCode.match(authCodeRegx)){
+        res.json({
+            status:false,
+            message:'验证码错误'
+        });
+        return false;
+    }
+
+
+    //校验验证码
+    var phoneId = "register:" + phone;
+    redis.get(phoneId, function (err, resultCode) {
+        if (err) {
+            res.json({
+                status:false,
+                message:'系统开小差啦，请稍后重试'
+            });
+            return false;
         }
-        console.log('success...');
-        res.send(data);
-    })
+
+        //检验验证码是否正确
+        if(resultCode !== authCode){
+            res.json({
+                status:false,
+                message:'验证码错误，请输入正确的验证码'
+            });
+            return false;
+        }
+
+        User.findPhone(phone,function(err,results){
+
+            console.log(err);
+            console.log(results);
+
+            if(err){
+                res.json({
+                    success:false,
+                    message:'验证码系统开小差啦，请稍后重试'
+                });
+                return false;
+            }
+
+            if(results.length <= 0){
+
+                var name = req.body.name ||'Ant-Man';
+                var phone = req.body.phone;
+                var password = md5.update(req.body.password).digest('base64');
+                var activeType = req.body.activeType || 'ANT';
+                var channelId = req.body.channelId || 'ANT-User';
+
+                var userData = {
+                    name: name ,
+                    phone: phone,
+                    password: password,
+                    activeType: activeType,
+                    channelId: channelId,
+                    //weight: '0'
+                };
+                console.log(userData);
+
+                User.newAndSave(userData,function(err,data){
+                    if(err){
+                        console.log(err);
+                        res.json({
+                            status:false,
+                            message:err.message
+                        });
+                        return;
+                    }
+                    console.log('success...');
+                    res.json({
+                        status:true,
+                        message:'注册成功'
+                    });
+                });
+            }else{
+                res.json({
+                    success:false,
+                    message:'该手机号码已被注册'
+                });
+            }
+
+
+        });
+
+    });
+
 
 };
 

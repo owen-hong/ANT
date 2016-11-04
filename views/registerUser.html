@@ -8,7 +8,7 @@
 </head>
 <body style="width: 500px;">
 <h1><%= title %></h1>
-<form class="form-horizontal" role="form" action="/doRegister" method="post">
+<form id="registerUsere" action="/doRegister" class="form-horizontal" role="form"  method="post" enctype="multipart/form-data">
     <div class="form-group">
         <label class="col-sm-2 control-label">phone</label>
         <div class="col-sm-10">
@@ -31,12 +31,13 @@
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
             <input type="hidden" name="channelId" value="<%= channelId %>"/>
+            <input type='hidden' name='_csrf' value='<%= csrf %>'/>
             <button type="submit" class="btn btn-primary">注册</button>
         </div>
     </div>
 </form>
 
-<script src="//cdn.bootcss.com/jquery/1.8.3/jquery.js"></script>
+<script src="//cdn.bootcss.com/jquery/2.1.4/jquery.js"></script>
 <script>
     $(function(){
 
@@ -59,7 +60,10 @@
 
         }
 
+
+        //验证码校验
         $("#authCodeBtn").click(function(){
+            var $this = $(this);
             var regx = /^(13|15|17|18|14)[0-9]{9}$/;
             var phone = $("input[name='phone']").val().trim();
 
@@ -67,19 +71,60 @@
                 console.log('yes..');
                 $.get('/authCode?phone=' + phone,function(data){
                     console.log(data);
-
+                    if(data.success){
+                        settime($this,10);
+                    }else{
+                        alert(data.message);
+                    }
+                }).fail(function(){
+                    alert('验证码发送失败，请稍后重试');
                 });
-                settime($(this),10);
+
             }else{
                 alert('请填写正确的手机号码!!');
                 console.log('error');
             }
-
-
-
         });
 
+        $('#registerUsere').submit(function(){
+            var phone = $("input[name='phone']").val().trim();
+            var password = $("input[name='password']").val().trim();
+            var authCode = $("input[name='authCode']").val().trim();
 
+            if(phone ==""){
+                alert('请填写您的手机号码！');
+                return false;
+            } else if(password ==""){
+                alert('请填写您的密码！');
+                return false;
+            } else if(authCode ==""){
+                alert('请填写您的验证码！');
+                return false;
+            }else{
+                console.log(this);
+                var formdata = new FormData(this);
+                $.ajax({
+                    type: 'post',
+                    url: 'http://localhost:3000/doRegister',
+                    data: formdata,
+                    contentType: false,
+                    processData: false
+                }).done(function (data) {
+
+                    console.log(data);
+
+                    if (data.status) {
+                        alert("保存成功!");
+                    } else {
+                        alert(data.message);
+                    }
+                }).fail(function (data) {
+                    console.log("注册失败！");
+                });
+            }
+//            e.preventDefault()
+            return false;
+        });
     });
 
 </script>

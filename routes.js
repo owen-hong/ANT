@@ -19,7 +19,6 @@ exports.handle = function (app) {
     app.get('/authCode', Passport.authCode);
 
 
-
     app.get('/register', Home.registerUser);
     app.post('/doRegister', Home.doRegisterUser);
 
@@ -31,7 +30,7 @@ exports.handle = function (app) {
 
 
 
-
+    //admin
     app.get('/admin', Admin.index);
     app.get('/admin/login', Admin.login);
 

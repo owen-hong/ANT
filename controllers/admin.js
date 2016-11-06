@@ -28,6 +28,7 @@ exports.addAdminUser = function(req,res){
 
 exports.doAddAdminUser = function(req,res){
     console.log(req.body.userName);
+    console.log(req.body.channelId);
     console.log(req.body.password);
 
     res.end();

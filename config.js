@@ -4,10 +4,11 @@
 
 'use strict';
 
-//³£ÓÃÅäÖÃÎÄ¼ş
+//é…ç½®æ–‡ä»¶
 var config = {
     port: 3000,
     debug: false,
+    rdCookieTime: new Date(Date.now() + 900000), //cookieçš„æœ‰æ•ˆæœŸä¸º900000ms
     db:'mongodb://127.0.0.1/ANT',
     session_secret:'owenhong',
     redis_port:'6379',

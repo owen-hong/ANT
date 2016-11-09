@@ -39,9 +39,6 @@ exports.index = function(req,res){
     //        });
     //    });
 
-
-
-
     User.findName('Ant-Man',function(err,data){
         if(err){
             console.log(err);

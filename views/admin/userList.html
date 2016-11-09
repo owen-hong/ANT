@@ -15,7 +15,7 @@
                     </th>
                     <th>手机号码</th>
                     <th>所属分类</th>
-                    <th>渠道号</th>
+                    <th>渠道ID</th>
                     <th>投资金额</th>
                     <th>注册时间</th>
                 </tr>
@@ -54,14 +54,36 @@
             </tbody>
         </table>
     </div>
-    <!-- 分页 -->
+
+    <!-- 分页 start -->
     <div class="dataTables_wrapper">
         <div class="fg-toolbar ui-toolbar ui-widget-header ui-corner-bl ui-corner-br ui-helper-clearfix" id="pager">
             <!-- 分页内容 -->
         </div>
     </div>
+    <!-- 分页 end -->
 </div>
 
 <script src="js/jquery.pager.js"></script>
+<% if(posts!=="") { %>
+<script type="text/javascript">
+    var PageClick = function(pageclickednumber) {
+
+        console.log(pageclickednumber);
+
+        window.location.href= "/admin/userList?page=" + pageclickednumber;
+
+        $("#pager").pager({ pagenumber: pageclickednumber, pagecount:<%= maxPage %>, buttonClickCallback: PageClick });
+
+    $("#result").html("Clicked Page " + pageclickednumber);
+
+    }
+
+    $(document).ready(function() {
+        $("#pager").pager({ pagenumber:<%= currentPage %>, pagecount:<%= maxPage %>, buttonClickCallback: PageClick });
+    });
+</script>
+<% } %>
+
 
 <% include footer.html %>

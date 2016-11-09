@@ -10,7 +10,6 @@ var Schema = mongoose.Schema;
 var ModelSchema = new Schema({
     name: {
         type: String,
-        unique: true,
         required: true
     },
     phone: {
@@ -23,7 +22,8 @@ var ModelSchema = new Schema({
     },
     channelId: {
         type: String,
-        default: 'Admin-User'
+        unique: true,
+        required: true
     },
     amount:{
         type:Number,

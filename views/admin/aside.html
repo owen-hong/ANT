@@ -4,12 +4,46 @@
         <i class="icon icon-list"></i>&nbsp;&nbsp;菜单
     </a>
     <ul>
+        <% if(locals.adminUserWeight == '2'){ %>
+        <li class="submenu active">
+            <a href="/admin/adminChannelList">
+                <i class="icon icon-home"></i>
+                <span>业绩首页</span>
+            </a>
+        </li>
+        <% }else{ %>
         <li class="submenu active">
             <a href="/admin">
                 <i class="icon icon-home"></i>
                 <span>首页</span>
             </a>
         </li>
+        <li class="submenu">
+            <a href="/admin/userList">
+                <i class="icon icon-th-list"></i>
+                <span>注册用户列表</span>
+            </a>
+        </li>
+        <li class="submenu">
+            <a href="javascript:;">
+                <i class="icon icon-user"></i>
+                <span>添加渠道商</span>
+            </a>
+            <ul class="s_menu" style="display:none;">
+                <li><a href="/admin/adminUserList">渠道商列表</a></li>
+                <li><a href="/admin/addAdminUser">添加渠道商</a></li>
+            </ul>
+        </li>
+        <% } %>
+        <!--<li class="submenu">-->
+            <!--<a href="javascript:;">-->
+            <!--<i class="icon icon-upload"></i>-->
+            <!--<span>管理中心</span>-->
+            <!--</a>-->
+            <!--<ul class="s_menu" style="display:none;">-->
+                <!--<li><a href="/admin/adminUserList">渠道管理员列表</a></li>-->
+            <!--</ul>-->
+        <!--</li>-->
         <!-- 文章管理 -->
         <!--<li class="submenu">-->
             <!--<a href="javascript:;">-->
@@ -22,16 +56,6 @@
             <!--</ul>-->
         <!--</li>-->
         <!--&lt;!&ndash; 分类 &ndash;&gt;-->
-        <!--<li class="submenu">-->
-            <!--<a href="javascript:;">-->
-                <!--<i class="icon icon-th-list"></i>-->
-                <!--<span>分类管理</span>-->
-            <!--</a>-->
-            <!--<ul class="s_menu" style="display:none;">-->
-                <!--<li><a href="/admin/classify">分类列表</a></li>-->
-                <!--<li><a href="/admin/addClass">添加分类</a></li>-->
-            <!--</ul>-->
-        <!--</li>-->
         <!--&lt;!&ndash; 添加tags &ndash;&gt;-->
         <!--<li class="submenu">-->
             <!--<a href="javascript:;">-->
@@ -52,25 +76,6 @@
             <!--<ul class="s_menu" style="display:none;">-->
                 <!--<li><a href="/admin/linkList">链接列表</a></li>-->
                 <!--<li><a href="/admin/addLink">添加友情</a></li>-->
-            <!--</ul>-->
-        <!--</li>-->
-        <li class="submenu">
-            <a href="javascript:;">
-                <i class="icon icon-user"></i>
-                <span>添加渠道商</span>
-            </a>
-            <ul class="s_menu" style="display:none;">
-                <li><a href="/admin/addAdminUser">添加渠道商</a></li>
-                <li><a href="/admin/editPassword">修改密码</a></li>
-            </ul>
-        </li>
-        <!--<li class="submenu">-->
-            <!--<a href="javascript:;">-->
-                <!--<i class="icon icon-upload"></i>-->
-                <!--<span>管理中心</span>-->
-            <!--</a>-->
-            <!--<ul class="s_menu" style="display:none;">-->
-                <!--<li><a href="/admin/userList">管理员列表</a></li>-->
             <!--</ul>-->
         <!--</li>-->
     </ul>

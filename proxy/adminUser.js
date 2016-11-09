@@ -5,32 +5,13 @@
 'use strict';
 
 var models  = require('../models');
-var OneSelf    = models.User;
+var OneSelf    = models.adminUser;
 
 //find all
-exports.findAll = function (start,listRows,callback) {
+exports.findAll = function (callback) {
     OneSelf
-        .find()
+        .find({weight:'2'})
         .sort('-created')
-        .limit(listRows)
-        .skip(start)
-        .exec(callback);
-}
-
-//find channel all
-exports.findChannelAll = function (id,start,listRows,callback) {
-    OneSelf
-        .find({channelId: id})
-        .sort('-created')
-        .limit(listRows)
-        .skip(start)
-        .exec(callback);
-}
-
-//find phone
-exports.findPhone = function (phone, callback) {
-    OneSelf
-        .find({phone: phone})
         .exec(callback);
 }
 
@@ -38,18 +19,7 @@ exports.findPhone = function (phone, callback) {
 exports.findChannelId = function (id, callback) {
     OneSelf
         .find({channelId: id})
-        .sort('created')
         .exec(callback);
-}
-exports.findChannelCount = function(id,callback) {
-    OneSelf.count({channelId: id},callback);
-}
-
-
-
-//查询所有文章数量
-exports.findCount = function(callback) {
-    OneSelf.count(null,callback);
 }
 
 
@@ -71,7 +41,6 @@ exports.newAndSave = function (data, callback) {
     self.name            = data.name;
     self.phone           = data.phone;
     self.password        = data.password;
-    self.activeType      = data.activeType;
     self.channelId       = data.channelId;
     self.amount          = data.amount;
     self.weight          = data.weight;

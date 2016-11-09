@@ -7,6 +7,7 @@
     <file url="file://$PROJECT_DIR$/controllers/passport.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/controllers/qcloud_sms.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/controllers/sms.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/proxy/adminUser.js" charset="UTF-8" />
     <file url="PROJECT" charset="UTF-8" />
   </component>
 </project>

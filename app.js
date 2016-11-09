@@ -85,7 +85,9 @@ app.use(csurf({ cookie: true }));
 
 app.use(function (req, res, next) {
     res.locals.csrf = req.csrfToken ? req.csrfToken() : '';
-    res.locals.user = req.session.user;
+    res.locals.adminUserId = req.session.adminUserId;
+    res.locals.adminUserName = req.session.adminUserName;
+    res.locals.adminUserWeight = req.session.adminUserWeight;
     next();
 });
 

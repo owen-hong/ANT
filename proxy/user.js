@@ -30,11 +30,11 @@ exports.findChannelAll = function (id,start,listRows,callback) {
 //find phone
 exports.findPhone = function (phone, callback) {
     OneSelf
-        .find({phone: phone})
+        .findOne({phone: phone})
         .exec(callback);
 }
 
-//find phone
+//find Channel Id
 exports.findChannelId = function (id, callback) {
     OneSelf
         .find({channelId: id})

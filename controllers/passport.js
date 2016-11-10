@@ -132,7 +132,7 @@ exports.authCode = function(req, res) {
                 return false;
             }
 
-            if(results.length <= 0){
+            if(results == ""){
                 var config = {
                     phone:phone
                 }

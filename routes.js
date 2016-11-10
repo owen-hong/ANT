@@ -8,6 +8,12 @@ var Passport = require('./controllers/passport');
 
 
 exports.handle = function (app) {
+
+
+    /**
+     * index start...
+     */
+
     //index
     app.get('/', Home.index);
 
@@ -28,19 +34,22 @@ exports.handle = function (app) {
 
 
 
+
+    /**
+     * admin start...
+     */
+
     //admin
     app.get('/admin', Admin.adminIsLoggedIn, Admin.index);
 
 
-    //后台退出
+    //退出后台
     app.get('/admin/adminLoginOut', Admin.adminLoginOut);
 
 
     //后台登录
     app.get('/admin/AdminUserLogin', Admin.AdminUserLogin);
     app.post('/admin/doAdminUserLogin', Admin.doAdminUserLogin);
-
-
 
 
     //所有注册用户列表

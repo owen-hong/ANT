@@ -147,10 +147,6 @@ exports.doRegisterUser = function(req,res){
         }
 
         User.findPhone(phone,function(err,results){
-
-            console.log(err);
-            console.log(results);
-
             if(err){
                 res.json({
                     success:false,
@@ -159,7 +155,11 @@ exports.doRegisterUser = function(req,res){
                 return false;
             }
 
-            if(results.length <= 0){
+            console.log(err);
+            console.log(results);
+
+            if(results == ""){
+                console.log('手机为空');
 
                 var name = req.body.name ||'Ant-Man';
                 var phone = req.body.phone;
@@ -198,12 +198,7 @@ exports.doRegisterUser = function(req,res){
                     message:'该手机号码已被注册'
                 });
             }
-
-
         });
-
     });
-
-
 };
 

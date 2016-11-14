@@ -21,18 +21,18 @@ passport.use('local',
         User.findPhone(username,function(err,posts){
             if (err) { return done(err); }
 
-            if (!posts[0]) {
+            if (!posts) {
                 console.log('Incorrect username');
                 return done(null, false);
             }
 
 
-            if (Pass !== posts[0].password) {
+            if (Pass !== posts.password) {
                 console.log('Incorrect password');
                 return done(null, false);
             }
 
-            return done(null, posts[0].phone);
+            return done(null, posts.phone);
 
         });
     }
@@ -132,7 +132,7 @@ exports.authCode = function(req, res) {
                 return false;
             }
 
-            if(results == ""){
+            if(results == "" || results == null){
                 var config = {
                     phone:phone
                 }

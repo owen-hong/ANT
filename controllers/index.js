@@ -158,9 +158,7 @@ exports.doRegisterUser = function(req,res){
             console.log(err);
             console.log(results);
 
-            if(results == ""){
-                console.log('手机为空');
-
+            if(results == "" || results == null){
                 var name = req.body.name ||'Ant-Man';
                 var phone = req.body.phone;
                 var password = md5.update(req.body.password).digest('base64');

@@ -32,6 +32,10 @@ exports.findName = function (name, callback) {
         .exec(callback);
 }
 
+//删除指定id的数据
+exports.removeById = function (id, callback) {
+    OneSelf.findByIdAndRemove(id,callback);
+}
 
 
 //save

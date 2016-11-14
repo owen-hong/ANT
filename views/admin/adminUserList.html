@@ -17,6 +17,7 @@
                 <th>渠道ID</th>
                 <th>投资金额</th>
                 <th>注册时间</th>
+                <th>操作</th>
             </tr>
             </thead>
             <tbody>
@@ -37,6 +38,9 @@
                 </td>
                 <td>
                     <%= locals.moment(post.created).format("YYYY-MM-DD h:mm a") %>
+                </td>
+                <td>
+                    <a href="/admin/deleteAdminUser?id=<%= post._id %>" onclick="delcfm()" class="btn btn-danger">删除</a>
                 </td>
             </tr>
             <% }) %>

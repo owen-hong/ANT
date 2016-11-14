@@ -58,8 +58,14 @@ exports.handle = function (app) {
     //渠道商业绩列表
     app.get('/admin/adminChannelList', Admin.adminIsLoggedIn, Admin.adminChannelList);
 
+
+
     //渠道管理员列表
     app.get('/admin/adminUserList', Admin.adminIsLoggedIn, Admin.adminUserList);
+
+    app.get('/admin/deleteAdminUser', Admin.adminIsLoggedIn, Admin.deleteAdminUser);
+
+
 
     //添加渠道管理员
     app.get('/admin/addAdminUser', Admin.adminIsLoggedIn, Admin.addAdminUser);

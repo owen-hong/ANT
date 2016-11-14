@@ -6,18 +6,20 @@ var TopClient = require('ali-top-sdk').TopClient;
 var Redis = require('ioredis');
 var redis = new Redis();
 
+var config   = require('../config.js');
+
 exports.sendCode = function(Config,callback){
     //生成4位数字的随机数
     var code = Math.floor(Math.random() * (9999 - 999 + 1) + 999);
 
     var tel = Config.phone;
-    var param = '{\"name\":\"欧文\",\"code\":\"'+ code +'\",\"time\":\"1\"}';
-    var validTime = 6000; //设置验证码有效时间
+    var param = '{\"code\":\"'+ code +'\",\"time\":\"5\"}';
+    var validTime = config.smsValidTime; //设置验证码有效时间
     var phoneId = "register:" + tel;
 
     var client = new TopClient({
-        'appkey': '23488432',
-        'appsecret':'e3e204fb11edb3afa5bc4392ee0796c6',
+        'appkey': config.smsAppkey,
+        'appsecret':config.smsAppsecret,
         'REST_URL': 'http://gw.api.taobao.com/router/rest'
     });
 
@@ -39,10 +41,10 @@ exports.sendCode = function(Config,callback){
             client.execute('alibaba.aliqin.fc.sms.num.send', {
                 'extend': '123456',
                 'sms_type': 'normal',
-                'sms_free_sign_name':'520UED前端',
+                'sms_free_sign_name':'蚁人科技',
                 'sms_param': param,
                 'rec_num': tel,
-                'sms_template_code': 'SMS_19565021'
+                'sms_template_code': config.smsTemplateCode
             }, function (error, response) {
                 console.log(error);
                 console.log(response);

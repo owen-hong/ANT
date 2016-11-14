@@ -97,6 +97,17 @@ exports.adminUserList = function(req,res){
     });
 
 }
+exports.deleteAdminUser = function(req,res){
+    AdminUser.removeById(req.query.id,function(err,data){
+        if (err) {
+            return res.send(err);
+        }
+
+        res.redirect('/admin/adminUserList');
+    });
+}
+
+
 
 exports.addAdminUser = function(req,res){
     res.render('admin/addAdminUser',{

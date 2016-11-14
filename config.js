@@ -13,7 +13,11 @@ var config = {
     session_secret:'owenhong',
     redis_port:'6379',
     redis_host:'127.0.0.1',
-    listRows:10
+    listRows:10,
+    smsValidTime:3000, //设置验证码有效时间
+    smsAppkey:'23516126',
+    smsAppsecret:'5116deb101854474eb2360695e008455',
+    smsTemplateCode:'SMS_25165288'
 }
 
 module.exports = config;

@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
     <title><%= title %></title>
     <link href="//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.css" rel="stylesheet">
 </head>
@@ -42,7 +42,7 @@
     $(function(){
 
         // 验证码
-        var countdown=10;
+        var countdown=120;
         function settime(event,time) {
             if (countdown < 0) {
                 event.prop("disabled",false);

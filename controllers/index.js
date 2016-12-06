@@ -22,23 +22,6 @@ var User = require('../proxy/user.js');
 
 
 exports.index = function(req,res){
-
-    var tel = '18820183227';
-    var code = '5201314';
-    //redis.pipeline().get('foo').multi().set('foo', 'abc').get('foo').exec().get('foo').exec();
-
-    //redis.multi()
-    //    //限制访问频率60秒
-    //    .set("register:" + tel, code)
-    //    .expire("register:" + tel, 30)
-    //    .exec(function (err, replies) {
-    //        if (!err)return res.json({
-    //            errMsg: "ok",
-    //            errCode: 0,
-    //            data:replies
-    //        });
-    //    });
-
     User.findName('Ant-Man',function(err,data){
         if(err){
             console.log(err);
@@ -52,37 +35,28 @@ exports.index = function(req,res){
 
 
 exports.code = function(req,res){
-    var tel = '18820183227';
-
-    redis.get("register:" + tel).then(function (result) {
-        console.log(result);
-        res.send(result)
-    }).catch(function(e){
-        console.log('err');
-        console.log(e);
-    })
-
+    res.render('index',{
+        title:'注册用户',
+    });
 }
 
 exports.registerUser = function(req,res){
     var channelId = req.query.channelId || 'ANT-User';
 
     //判断渠道商RD是否有效
-    if(channelId == 'ANT-User' && req.cookies.channelId){
-        channelId = req.cookies.channelId;
-    }else{
-        res.cookie('channelId', channelId, {
-            path: '/',
-            expires: config.rdCookieTime , //cookie的有效期为900000ms
-            signed:true
-        });
-    }
-
-    console.log(channelId);
-
-
-
-    //res.clearCookie('channelId');
+    //if(req.cookies.channelId){
+    //    channelId = req.cookies.channelId;
+    //    console.log('yes');
+    //    console.log(channelId);
+    //}
+    //if(req.query.channelId){
+    //    console.log('no');
+    //    res.cookie('channelId', channelId, {
+    //        path: '/register',
+    //        expires: config.rdCookieTime , //cookie的有效期为900000ms
+    //        signed:true
+    //    });
+    //}
 
     res.render('registerUser',{
         title:'注册用户',
@@ -92,7 +66,6 @@ exports.registerUser = function(req,res){
 
 exports.doRegisterUser = function(req,res){
     var md5 = crypto.createHash('md5');
-
 
     var phone = req.body.phone.trim();
     var password = req.body.password.trim();

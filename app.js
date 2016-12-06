@@ -91,6 +91,14 @@ app.use(function (req, res, next) {
     next();
 });
 
+
+if (!config.debug) {
+
+    // 视图缓存
+    app.set('view cache', true);
+}
+
+
 //启动路由中心
 Routes.handle(app);
 

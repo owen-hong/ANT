@@ -1,60 +1,27 @@
-<!doctype html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta charset="utf-8">
-<!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
-<title>深圳蚁人科技信息有限公司</title>
-<link rel="stylesheet" href="/css/style.css">
-<link rel="stylesheet" type="text/css" href="/css/idangerous.swiper.css"/>
-<!--[if lte IE 9]>
-<script src="/js/html5.js"></script>
-<![endif]-->
-<script src="/js/jquery.js" type="text/javascript" charset="utf-8"></script>
-<script src="/js/idangerous.swiper.min.js" type="text/javascript" charset="utf-8"></script>
+<% include header.html %>
 <script src="/js/site.js" type="text/javascript" charset="utf-8"></script>
-</head>
-
-<body>
-<!--顶部-->
-<div class="header">
-	<!--LOGO-->
-	<div class="topBar">
-		<div class="row clearfix">
-			<div class="logo fl"><a href="index.html"><img src="images/logo.png"/></a></div>
-			<div class="nav fr">
-				<ul class="menu clearfix">
-                    <li><a href="index.html" class="active">首页</a></li>
-                    <li><a href="javascript:;">效果营销</a></li>
-                    <li><a href="javascript:;" >关于蚁人</a></li>
-                    <li><a href="news_list.html" >新闻中心</a></li>
-                    <li><a href="javascript:;" >联系我们</a></li>
-                </ul>
-			</div>
-		</div>
-	</div>
-</div>
-
 <!--主体内容-->
 <div class="container fill">
 	<!--幻灯图-->
 	<div class="vSlide">
 		<div class="swiper-container">
-		    <div class="swiper-wrapper">
-		      <div class="swiper-slide" style="background-image: url(photos/slide1.png)"></div>
-		      <div class="swiper-slide" style="background-image: url(photos/slide1.png);"></div>
-		      <div class="swiper-slide" style="background-image: url(photos/slide1.png);"></div>
-		    </div>
-		    <div class="pagination"></div>
+			<div class="swiper-wrapper">
+				<div class="swiper-slide" style="background-image: url(photos/banner-1.jpg)"></div>
+				<div class="swiper-slide" style="background-image: url(photos/banner-2.jpg);"></div>
+				<div class="swiper-slide" style="background-image: url(photos/banner-3.jpg);"></div>
+				<div class="swiper-slide" style="background-image: url(photos/banner-4.jpg);"></div>
+			</div>
+			<div class="pagination"></div>
 		</div>
 		<script>
-		    var mySwiper = new Swiper('.swiper-container',{
-		    pagination: '.pagination',
-		    paginationClickable: true,
-            autoplay: 4000
-		  })
+			var mySwiper = new Swiper('.swiper-container',{
+				pagination: '.pagination',
+				paginationClickable: true,
+				autoplay: 4000
+			})
 		</script>
-	</div>	
-	
+	</div>
+
 	<!--page_list-->
 	<div class="page page_01" id="page_01">
 		<h2 class="tit">效果模式</h2>
@@ -95,7 +62,7 @@
 		</div>
 	</div>
 	<!--page_01 END-->
-	
+
 	<div class="page page_02">
 		<div class="row">
 			<img src="images/page2.png" class="img1"/>
@@ -124,6 +91,7 @@
 				<p class="img6"></p>
 				<p class="img7"></p>
 				<p class="img8"></p>
+				<img src="images/page3_phone.png" class="phone_img" alt="">
 			</div>
 			<div class="flag"></div>
 		</div>
@@ -142,6 +110,7 @@
 				<img src="images/page4_03.png" class="img3" alt="">
 				<img src="images/page4_04.png" class="img4" alt="">
 				<img src="images/page4_05.png" class="img5" alt="">
+				<img src="images/page4_phone.png" class="phone_img" alt="">
 			</div>
 			<div class="flag"></div>
 		</div>
@@ -157,23 +126,23 @@
 
 			<ul class="text_center clearfix">
 				<li>
-					<img src="images/page5_01.png" alt="">
+					<div class="img"><img src="images/page5_01.png" alt=""></div>
 					<h2>愿景</h2>
 					<p>成为领先的互联网效果营销服务企业</p>
 				</li>
 				<li>
-					<img src="images/page5_02.png" alt="">
+					<div class="img"><img src="images/page5_02.png" alt=""></div>
 					<h2>使命</h2>
 					<p>数据可信<br>服务领先<br>提升效果</p>
 				</li>
 				<li>
-					<img src="images/page5_03.png" alt="">
+					<div class="img"><img src="images/page5_03.png" alt=""></div>
 					<h2>价值观</h2>
 					<p>专注、诚信 <br>
 						责任、创新、共赢</p>
 				</li>
 				<li>
-					<img src="images/page5_04.png" alt="">
+					<div class="img"><img src="images/page5_04.png" alt=""></div>
 					<h2>理念</h2>
 					<p>不断完善产品和服务 <br>
 						与客户一起成长 <br>
@@ -215,39 +184,39 @@
 			<dl class="case clearfix">
 				<dt>客户案例 <p>Customer case</p></dt>
 				<dd><a href="###">
-					<img src="images/page8_case_01.png" alt="">
+					<div class="img"><img src="images/page8_case_01.png" alt=""></div>
 					<p>旅游</p></a>
 				</dd>
 				<dd><a href="###">
-					<img src="images/page8_case_02.png" alt="">
+					<div class="img"><img src="images/page8_case_02.png" alt=""></div>
 					<p>金融</p></a>
 				</dd>
 				<dd><a href="###">
-					<img src="images/page8_case_03.png" alt="">
+					<div class="img"><img src="images/page8_case_03.png" alt=""></div>
 					<p>房地产家居</p></a>
 				</dd>
 				<dd><a href="###">
-					<img src="images/page8_case_04.png" alt="">
+					<div class="img"><img src="images/page8_case_04.png" alt=""></div>
 					<p>品牌</p></a>
 				</dd>
 				<dd><a href="###">
-					<img src="images/page8_case_05.png" alt="">
+					<div class="img"><img src="images/page8_case_05.png" alt=""></div>
 					<p>电商</p></a>
 				</dd>
 				<dd><a href="###">
-					<img src="images/page8_case_06.png" alt="">
+					<div class="img"><img src="images/page8_case_06.png" alt=""></div>
 					<p>游戏</p></a>
 				</dd>
 				<dd><a href="###">
-					<img src="images/page8_case_07.png" alt="">
+					<div class="img"><img src="images/page8_case_07.png" alt=""></div>
 					<p>摄影</p></a>
 				</dd>
 				<dd><a href="###">
-					<img src="images/page8_case_01.png" alt="">
+					<div class="img"><img src="images/page8_case_01.png" alt=""></div>
 					<p>APP</p></a>
 				</dd>
 				<dd><a href="###">
-					<img src="images/page8_case_09.png" alt="">
+					<div class="img"><img src="images/page8_case_09.png" alt=""></div>
 					<p>娱乐</p></a>
 				</dd>
 			</dl>
@@ -266,7 +235,7 @@
 
 			<script>
 				$(function(){
-					$(".page_08 dl dd").eq(5).css({"margin-left":"100px"});
+					//$(".page_08 dl dd").eq(5).css({"margin-left":"100px"});
 				});
 			</script>
 		</div>
@@ -291,47 +260,6 @@
 		</div>
 	</div>
 	<!--page_09 END-->
-
-
 </div>
 
-<!--底部-->
-<div class="footer">
-	<div class="row">
-		<div class="nav_con clearfix">
-			<ul class="footer_nav fl">
-				<li><a href="##">首页</a></li>
-				<li><a href="##">关于蚁人</a></li>
-				<li><a href="##">互动营销</a></li>
-				<li><a href="##">新闻中心</a></li>
-				<li><a href="##">联系我们</a></li>
-			</ul>
-			<ul class="footer_con fr">
-				<li class="phone">手机：<span>13510188260</span></li>
-				<li class="mail">邮箱：<a href="mailto:sywork@qq.com">sywork@qq.com</a></li>
-				<li class="address">地址：深圳市南山区高新园飞亚达科技大厦东座18楼</li>
-			</ul>
-		</div>
-
-		<div class="f_link">
-			<dl class="clearfix">
-				<dt>友情链接：</dt>
-				<dd><a href="##">新浪</a></dd>
-				<dd><a href="##">网易</a></dd>
-				<dd><a href="##">百度</a></dd>
-				<dd><a href="##">腾讯</a></dd>
-				<dd><a href="##">谷歌</a></dd>
-				<dd><a href="##">360</a></dd>
-				<dd><a href="##">搜狐</a></dd>
-				<dd><a href="##">搜狗</a></dd>
-				<dd><a href="##">爱奇艺</a></dd>
-				<dd><a href="##">小米</a></dd>
-				<dd><a href="##">金山</a></dd>
-			</dl>
-		</div>
-		<p class="copyright">Copyright @ 1996-2014 深圳蚁人信息科技有限公司版权所有 <a href="##">粤ICP备12034337号</a></p>
-	</div>
-</div>
-
-</body>
-</html>
+<% include footer.html %>

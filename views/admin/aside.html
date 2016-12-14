@@ -18,6 +18,17 @@
                 <span>首页</span>
             </a>
         </li>
+        <!-- 文章管理 -->
+        <li class="submenu">
+            <a href="javascript:;">
+                <i class="icon icon-pencil"></i>
+                <span>文章管理</span>
+            </a>
+            <ul class="s_menu" style="display:none;">
+                <li class="active"><a href="/admin/article">文章列表</a></li>
+                <li><a href="/admin/add">添加文章</a></li>
+            </ul>
+        </li>
         <li class="submenu">
             <a href="/admin/userList">
                 <i class="icon icon-th-list"></i>
@@ -32,6 +43,17 @@
             <ul class="s_menu" style="display:none;">
                 <li><a href="/admin/adminUserList">渠道商列表</a></li>
                 <li><a href="/admin/addAdminUser">添加渠道商</a></li>
+            </ul>
+        </li>
+        <!-- 友情链接 -->
+        <li class="submenu">
+            <a href="javascript:;">
+                <i class="icon icon-tint"></i>
+                <span>友情管理</span>
+            </a>
+            <ul class="s_menu" style="display:none;">
+                <li><a href="/admin/linkList">链接列表</a></li>
+                <li><a href="/admin/addLink">添加友情</a></li>
             </ul>
         </li>
         <% } %>

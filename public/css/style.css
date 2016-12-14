@@ -188,3 +188,96 @@ html[xmlns] .clearfix { display: block; }
 .new_content h5 { text-align: center; font-weight: normal; font-size: 18px; color: #999; padding: 20px 0 40px;}
 .new_content .txt p { text-indent: 20px; font-size: 20px; margin-bottom: 15px; color: #333;}
 .new_content>p>.btn { width: 200px; height: 65px; line-height: 65px; font-size: 20px; margin-top: 30px;}
+
+.phone_menu { display: none; }
+.page_03 .imgs .phone_img { display: none;}
+/*phone*/
+@media (max-width: 768px){
+    body { padding-top: 50px !important; overflow-x: hidden;}
+    .row { width: 100%; box-sizing: border-box; padding: 0 8px;}
+    .hide { display: none !important;}
+    .flag { display: none;}
+
+    .phone_menu { display: block; position: absolute; right: 10px; top: 5px; transition: all 0.2s;}
+    .menuRight .phone_menu { right: 275px; }
+    .nav ul { position: absolute;  right: 0; top: 51px; background: #f5f5f5; display: none;}
+    .nav ul > li {float: none;}
+    .nav ul > li > a {font-size: 18px; margin-right: 0; display: block;height: 50px; line-height: 50px;padding: 0 30px;}
+    .minTop .nav ul > li > a { height: 50px; line-height: 50px;}
+
+    .topBar { height: 50px; line-height: 50px;}
+    .topBar .logo { height: 50px;}
+    .topBar .logo a { height: 42px; padding: 8px 0 0 10px;}
+    .topBar .logo img { height: 30px; transform: scale(1, 1); margin-left: 0; }
+
+    .vSlide { margin-top: 0px; padding: 0; height: 160px; }
+    .swiper-slide img { width: 100%; }
+    .swiper-container .pagination { bottom: 10px;}
+
+    .page .tit { font-size: 30px;}
+    .page .sub_tit, .page .info { font-size: 16px;}
+    .page .txt h2 { font-size: 30px;}
+    .page .txt p { font-size: 20px; margin-top: 0;}
+
+    .page_01, .page_01 ul { height: auto;}
+    .page_01 .info { margin-bottom: 30px;}
+    .page_01 ul li img { width: 80%; margin: 0 auto;}
+    .page_01 ul li { text-align: center; margin-bottom: 50px; width: 50%;}
+    .page_01 ul li p { padding-top: 10px;}
+
+    .page_02 .img1 { left: 0; width: 100%;  top: 165px;}
+    .page_02 .txt { position: static; text-align: center; padding-top: 45px;}
+    .page_02, .page_02 .row { height: 430px; }
+
+    .page_03 .imgs { width: 100%; height: auto;}
+    .page_03 .imgs p { display: none; }
+    .page_03 .imgs .phone_img { width: 100%; opacity: 0; display: block;}
+
+    .page_04 { height: auto; }
+    .page_04 .imgs { width: 100%; height: auto;}
+    .page_04 .imgs img { display: none; }
+    .page_04 .imgs img.phone_img { width: 100%; opacity: 0; display: block;}
+
+    .page_05 .tit,.page_05 .sub_tit {opacity: 0;}
+    .page_05 ul { width: 100%; padding-top: 50px;}
+    .page_05 ul li { width: 50%; box-sizing: border-box; background-size: 85%; padding-top: 30px;}
+    .page_05 ul li p { margin-bottom: 40px;}
+    .page_05 ul li .img { width: 70px; height: 70px; line-height: 70px; margin: 0 auto;}
+    .page_05 ul li .img img { width: 100%;}
+
+    .page_06 .img { height: auto; padding-top: 35px;}
+    .page_06 .img img { position: static; opacity: 1; width: 100%; }
+
+    .page_07 img { width: 100%;}
+    .page_07 p { font-size: 25px;}
+
+    .page_08 .case dt { height: auto; width: 100%; margin-bottom: 20px;}
+    .page_08 .case dd {  margin-bottom: 20px; width: 148px; height: 139px; background-size: 93%; box-sizing: border-box; padding-top: 19px; float: none; display: inline-block;}
+    .page_08 .case dd .img { width: 78px; height: 78px; line-height: 78px; margin: 0 auto;}
+    .page_08 .case dd .img img { width: 100%; }
+
+    .page_08 dt { width: 100%; margin-bottom: 20px;}
+    .page_08 dd { width: 49%;}
+
+    .page_09 { padding-bottom: 20px;}
+    .page_09 .row { height: auto;}
+    .page_09 .contact_info { position: static; opacity: 1; width: 100%; height: auto;}
+    .page_09 .contact_list { position: static;}
+    .page_09 .contact_info h2 { font-size: 23px; margin-bottom: 20px;}
+    .page_09 .sub_tit { margin-bottom: 30px;}
+    .page_09 .ditu {position: static; width: 100%; height: 200px; opacity: 1; background-size: 100%; margin-top: 50px;}
+
+    .new_content .txt .img { text-indent: 0;}
+    .new_content .txt .img img { width: 100%;}
+    .news_list .list_items li img { width: 100%;}
+    .news_list .list_items .txt { width: 100%;}
+    .news_list .list_items .txt h2 { font-size: 18px; padding-bottom: 10px; margin-bottom: 10px;}
+    .news_list .list_items .txt .t { font-size: 16px;}
+    .news_list .list_items .txt p .btn { width: 100%; height: 40px; line-height: 40px;}
+    .news_list .list_items li { margin-bottom: 60px;}
+    .newsBanner { height: 118px; background-size: 100%;}
+    .breadcrumb { font-size: 16px;}
+    .news_list .list_items { margin-top: 25px;}
+    .pagination > li > a, .pagination > li > span { margin: 10px 5px;}
+
+}

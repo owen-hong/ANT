@@ -1,0 +1,35 @@
+<!--底部-->
+<div class="footer">
+    <div class="row">
+        <div class="nav_con clearfix">
+            <ul class="footer_nav fl">
+                <li><a href="##">首页</a></li>
+                <li><a href="##">关于蚁人</a></li>
+                <li><a href="##">互动营销</a></li>
+                <li><a href="##">新闻中心</a></li>
+                <li><a href="##">联系我们</a></li>
+            </ul>
+            <ul class="footer_con fr">
+                <li class="phone">手机：<span>13510188260</span></li>
+                <li class="mail">邮箱：<a href="mailto:sywork@qq.com">sywork@qq.com</a></li>
+                <li class="address">地址：深圳市南山区高新园飞亚达科技大厦东座18楼</li>
+            </ul>
+        </div>
+
+        <div class="f_link">
+            <dl class="clearfix">
+                <dt>友情链接：</dt>
+                <% locals.LinkPosts.forEach(function(post, index) { %>
+                <dd>
+                    <a href="<%= post.links %>" rel="acquaintance" title="<%= post.keywords %>" target="_blank"><%= post.keywords %></a>
+                </dd>
+                <% }) %>
+            </dl>
+        </div>
+        <p class="copyright">Copyright @ 2015-2016 深圳蚁人信息科技有限公司版权所有 <a target="_blank" href="http://www.miitbeian.gov.cn" rel="nofollow">粤ICP备16110942号-1
+        </a></p>
+    </div>
+</div>
+
+</body>
+</html>

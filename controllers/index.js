@@ -16,28 +16,45 @@ var config   = require('../config.js');
 var request = require('request');
 var crypto = require('crypto');
 var Redis = require('ioredis');
+var Article = require('../proxy/article.js');
+var Links = require('../proxy/links.js');
 var redis = new Redis();
 
 var User = require('../proxy/user.js');
 
 
-exports.index = function(req,res){
-    User.findName('Ant-Man',function(err,data){
-        if(err){
-            console.log(err);
-            res.send(err);
-            return;
+//公共头尾数据输出
+exports.global = function (req, res, next) {
+    //友情链接数据输出
+    Links.findAll(function (err, Ldata) {
+        if (err) {
+            return res.send(err);
         }
-        console.log('success...');
-        res.send(data);
-    })
+        res.locals.LinkPosts = Ldata;
+
+        next();
+    });
+}
+
+
+exports.index = function(req,res){
+    res.render('index',{
+        title:'',
+    });
 };
 
 
 exports.code = function(req,res){
-    res.render('index',{
-        title:'注册用户',
-    });
+    var tel = '18820183227';
+
+    redis.get("register:" + tel).then(function (result) {
+        console.log(result);
+        res.send(result)
+    }).catch(function(e){
+        console.log('err');
+        console.log(e);
+    })
+
 }
 
 exports.registerUser = function(req,res){
@@ -173,3 +190,63 @@ exports.doRegisterUser = function(req,res){
     });
 };
 
+
+//文章列表
+exports.articleList = function (req, res) {
+    Article.findCount(function (err, count) {
+        if (err) {
+            return res.send(err);
+        }
+
+        //每页展示数量
+        var listRows = 10;
+        var maxPage = Math.ceil(count / listRows);
+
+        var $page = req.query.page ? req.query.page : 1;
+        var currentPage = $page <= 0 ? 1 : $page;
+
+        console.log(currentPage);
+
+        //数据开始位置
+        var start = (currentPage - 1) * listRows;
+
+        //查询
+        var fields = 'title created updated author classify clickCount top';
+
+        Article.findAll(fields, start, listRows, function (err, posts) {
+            if (err) {
+                return res.send(err);
+            }
+            if (posts == "") {
+                res.render('news_list', {
+                    title: '文章列表',
+                    nullTip: '暂无数据！',
+                    posts: ""
+                });
+            } else {
+                res.render('news_list', {
+                    title: '文章列表',
+                    currentPage: currentPage,
+                    maxPage: maxPage,
+                    posts: posts,
+                    nullTip: ""
+                });
+            }
+        });
+    });
+};
+
+//文章详情
+exports.articleDetails = function (req, res) {
+    Article.findOne(req.params.id, function (err, persons) {
+        if (err) {
+            return res.send(err);
+        }
+
+        res.render('news_content', {
+            title: '文章详情',
+            posts: persons,
+        });
+
+    });
+}

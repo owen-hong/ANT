@@ -23,6 +23,10 @@ mongoose.connect(config.db, {
 // models
 require('./user');
 require('./adminUser');
+require('./article');
+require('./links');
 
 exports.User = mongoose.model('User');
 exports.adminUser = mongoose.model('adminUser');
+exports.Article = mongoose.model('article');
+exports.Links = mongoose.model('Links');

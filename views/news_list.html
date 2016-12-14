@@ -1,0 +1,57 @@
+﻿<% include header.html %>
+<link rel="stylesheet" href="/css/jquery.page.css">
+
+<!--新闻列表-->
+<div class="news_list fill">
+	<div class="newsBanner"></div>
+	<div class="row">
+		<!--导航路径-->
+		<ol class="breadcrumb">
+			<li>你当前的位置：</li>
+			<li><a href="/">首页</a></li>
+			<li class="active">新闻中心</li>
+		</ol>
+
+		<!--新闻列表-->
+		<ul class="list_items">
+			<% if(posts!=="") { %>
+			<% posts.forEach(function(post, index) { %>
+			<li>
+				<p class="fl img"><a href="/articleDetails/<%= post.id %>"> <img width="400" height="300" src="<%= post.imgUrl %>" alt=""> </a></p>
+				<div class="fr txt">
+					<h2><%= post.title %></h2>
+					<p class="t"><%= post.description %>......</p>
+					<p class="text_right"><a href="/articleDetails/<%= post.id %>" class="btn btn_green">详细 &gt;</a></p>
+				</div>
+				<p style="clear: both;"></p>
+			</li>
+			<% }) %>
+			<% } %>
+		</ul>
+	</div>
+
+	<!--分页-->
+	<div class="text_center clearfix" id="pager">
+
+	</div>
+</div>
+<script src="/js/laypage.js"></script>
+<% if(posts!=="") { %>
+<script type="text/javascript">
+	$(function(){
+		$("#pager").Page({
+			totalPages: <%= maxPage %>,//分页总数
+			liNums: 8,//分页的数字按钮数(建议取奇数)
+			activeClass: 'activP', //active 类样式定义
+			callBack : function(page){
+				console.log('page.....');
+			}
+		});
+	})
+
+</script>
+<% } %>
+
+
+
+<% include footer.html %>

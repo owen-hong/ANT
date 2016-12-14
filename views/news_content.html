@@ -1,0 +1,28 @@
+﻿<% include header.html %>
+
+<!--新闻列表-->
+<div class="news_list fill">
+	<div class="newsBanner"></div>
+	<div class="row">
+		<!--导航路径-->
+		<ol class="breadcrumb">
+			<li>你当前的位置：</li>
+			<li><a href="/">首页</a></li>
+			<li class="active">新闻中心</li>
+		</ol>
+
+		<!--新闻内容-->
+		<div class="new_content">
+			<h1><%= posts.title %></h1>
+			<h5>发表日期<%= locals.moment(posts.created).format("YYYY-MM-DD") %></h5>
+
+			<div class="txt">
+				<%- posts.Content %>
+			</div>
+			<!--<p class="text_center"><a href="news_list.html" class="btn btn_green">返回</a></p>-->
+		</div>
+	</div>
+
+</div>
+
+<% include footer.html %>

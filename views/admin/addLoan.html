@@ -1,0 +1,156 @@
+<% include header.html %>
+<div class="row-fluid">
+	<div class="span12">
+		<div class="widget-box">
+			<div class="widget-title">
+				<span class="icon">
+					<i class="icon-align-justify"></i>
+				</span>
+				<h5><%= title %></h5>
+			</div>
+			<% if(update) { %></%>
+			<div class="widget-content nopadding">
+				<form class="form-horizontal" method="post" enctype="multipart/form-data" action="/admin/doUpload" id="form1">
+					<div class="control-group">
+						<label class="control-label">图片预览:</label>
+						<div class="controls">
+							<img id="preview_img" src="/<%= posts.imgUrl %>" style="width:150px;">
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">产品图片:</label>
+						<div class="controls">
+							<input type="file" name="imgFile" />
+							<input type="submit" value="确定上传" />
+							<span class="help-block" style="font-weight:bold;color:red;" id="s_tip">上传图片</span>
+						</div>
+					</div>
+					<input type='hidden' name='_csrf' id="_csrf" value='<%= csrf %>' />
+				</form>
+				<form action="/admin/doUpdateLoan" method="post" class="form-horizontal">
+					<input type="hidden" name="imgUrl" id="imgUrl" value="<%= posts.imgUrl %>" />
+					<div class="control-group">
+						<label class="control-label">产品名称:</label>
+						<div class="controls">
+							<input type="text" name="name" class="span11" placeholder="" value="<%= posts.name %>" />
+						</div>
+					</div>
+					<div class="control-group" id="oneClass">
+						<label class="control-label">链接地址 :</label>
+						<div class="controls">
+							<input type="text" name="links" class="span11" placeholder="http://" value="<%= posts.links %>" />
+						</div>
+					</div>
+					<div class="control-group" id="oneClass">
+						<label class="control-label">可贷额度 :</label>
+						<div class="controls">
+							<input type="text" name="limit" class="span11" placeholder="" value="<%= posts.limit %>" />
+						</div>
+					</div>
+					<div class="control-group" id="oneClass">
+						<label class="control-label">参考利率 :</label>
+						<div class="controls">
+							<input type="text" name="rate" class="span11" placeholder=""  value="<%= posts.rate %>" />
+						</div>
+					</div>
+					<div class="control-group" id="oneClass">
+						<label class="control-label">产品描述 :</label>
+						<div class="controls">
+							<input type="text" name="description" class="span11" placeholder="" value="<%= posts.description %>" />
+						</div>
+					</div>
+					<input type='hidden' name='_csrf' id="_csrf" value='<%= csrf %>' />
+					<input type='hidden' name='id' value='<%= posts.id %>' />
+					<div class="form-actions">
+						<button type="submit" class="btn btn-success">Save</button>
+					</div>
+				</form>
+			</div>
+			<% }else{ %></%>
+				<div class="widget-content nopadding">
+					<form class="form-horizontal" method="post" enctype="multipart/form-data" action="/admin/doUpload" id="form1">
+						<div class="control-group">
+							<label class="control-label">图片预览:</label>
+							<div class="controls">
+								<img id="preview_img" src="" style="width:150px;">
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">产品图片:</label>
+							<div class="controls">
+								<input type="file" name="imgFile" />
+								<input type="submit" value="确定上传" />
+								<span class="help-block" style="font-weight:bold;color:red;" id="s_tip">上传图片</span>
+							</div>
+						</div>
+						<input type='hidden' name='_csrf' id="_csrf" value='<%= csrf %>' />
+					</form>
+					<form action="/admin/doAddLoan" method="post" class="form-horizontal">
+						<input type="hidden" name="imgUrl" id="imgUrl" value="" />
+						<div class="control-group">
+							<label class="control-label">产品名称:</label>
+							<div class="controls">
+								<input type="text" name="name" class="span11" placeholder="" />
+							</div>
+						</div>
+						<div class="control-group" id="oneClass">
+							<label class="control-label">链接地址 :</label>
+							<div class="controls">
+								<input type="text" name="links" class="span11" placeholder="http://" />
+							</div>
+						</div>
+						<div class="control-group" id="oneClass">
+							<label class="control-label">可贷额度 :</label>
+							<div class="controls">
+								<input type="text" name="limit" class="span11" placeholder="" />
+							</div>
+						</div>
+						<div class="control-group" id="oneClass">
+							<label class="control-label">参考利率 :</label>
+							<div class="controls">
+								<input type="text" name="rate" class="span11" placeholder="" />
+							</div>
+						</div>
+						<div class="control-group" id="oneClass">
+							<label class="control-label">产品描述 :</label>
+							<div class="controls">
+								<input type="text" name="description" class="span11" placeholder="" />
+							</div>
+						</div>
+						<input type='hidden' name='_csrf' id="_csrf" value='<%= csrf %>' />
+						<div class="form-actions">
+							<button type="submit" class="btn btn-success">Save</button>
+						</div>
+					</form>
+				</div>
+			<% }%></%>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	$(function(){
+		$("#form1").submit(function(){
+			var formdata = new FormData(this);
+			$.ajax({
+				type:'post',
+				url : '/admin/doUpload',
+				data : formdata,
+				contentType: false,
+				processData: false
+			}).done(function(data){
+				console.log(data);
+				console.log(data.Url);
+				$("#imgUrl").val(data.Url);
+				$("#preview_img").attr("src",'/'+data.Url);
+				$("#s_tip").css("color","#008000");
+				$("#s_tip").html("上传成功");
+
+			}).fail(function(data){
+				console.log(data);
+			});
+
+			return false;
+		})
+	});
+</script>
+<% include footer.html %>

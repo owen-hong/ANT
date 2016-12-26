@@ -5,8 +5,8 @@
 var Home = require('./controllers/index');
 var Admin = require('./controllers/admin');
 var Passport = require('./controllers/passport');
-
 var Article = require('./controllers/article');
+var Loan = require('./controllers/loan');
 
 
 exports.handle = function (app) {
@@ -18,7 +18,7 @@ exports.handle = function (app) {
 
     app.get('*', Home.global);
 
-    //index
+    ////index
     app.get('/', Home.index);
 
     app.get('/isLoggedIn', Passport.isLoggedIn);
@@ -103,8 +103,6 @@ exports.handle = function (app) {
     app.get('/admin/file', Admin.adminIsLoggedIn, Article.file);
     app.post('/admin/doUpload', Admin.adminIsLoggedIn, Article.doUpload);
 
-
-
     //添加友情链接
     app.get('/admin/linkList', Admin.adminIsLoggedIn, Article.linkList);
 
@@ -115,6 +113,17 @@ exports.handle = function (app) {
 
     app.get('/admin/updateLinks', Admin.adminIsLoggedIn, Article.updateLink);
     app.post('/admin/doUpdateLinks', Admin.adminIsLoggedIn, Article.doUpdateLinks);
+
+    //Loan
+    //app.get('/admin/loanList', Admin.adminIsLoggedIn, Admin.loanList);
+    //app.get('/admin/addLoan', Admin.adminIsLoggedIn, Admin.addLoan);
+    //app.get('/admin/updateLoan', Admin.adminIsLoggedIn, Admin.updateLoan);
+    //app.get('/admin/doRemoveLoan', Admin.adminIsLoggedIn, Admin.doRemoveLoan);
+    //app.post('/admin/doAddLoan', Admin.adminIsLoggedIn, Admin.doAddLoan);
+    //app.post('/admin/doUpdateLoan', Admin.adminIsLoggedIn, Admin.doUpdateLoan);
+    //
+    //app.get('/', Loan.loanList);
+
 
 }
 

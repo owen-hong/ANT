@@ -5,6 +5,7 @@
 var crypto = require('crypto');
 var config   = require('../config.js');
 var User = require('../proxy/user.js');
+var Loan = require('../proxy/loan.js');
 var AdminUser = require('../proxy/adminUser.js');
 
 exports.index = function(req,res){
@@ -280,6 +281,82 @@ exports.adminLoginOut = function(req,res){
 
 
 
+exports.loanList = function (req, res) {
+    Loan.findAll(function (err, posts) {
+        if (err) {
+            return res.send(err);
+        }
 
+        res.render('admin/loanList', {
+            title: '产品列表',
+            posts: posts
+        });
+    });
+}
+
+exports.addLoan = function(req,res){
+    res.render('admin/addLoan',{
+        title:'添加产品',
+        posts: '',
+        update: false
+    });
+};
+exports.doAddLoan = function (req, res) {
+    var options = {
+        name: req.body.name,
+        imgUrl: req.body.imgUrl,
+        links: req.body.links,
+        limit: req.body.limit,
+        rate: req.body.rate,
+        description: req.body.description
+    };
+
+    Loan.newAndSave(options, function (err, posts) {
+        if (err) {
+            console.log(err);
+            return res.send(err);
+        }
+
+        res.redirect('/admin/loanList');
+    });
+}
+//删除友情链接
+exports.doRemoveLoan = function (req, res) {
+    Loan.removeById(req.query.id, function (err, posts) {
+        if (err) {
+            console.log(err);
+            return res.send(err);
+        }
+        res.redirect('/admin/loanList');
+    });
+}
+exports.updateLoan = function (req, res) {
+    Loan.findOne(req.query.id, function (err, posts) {
+        if (err) {
+            return res.send(err);
+        }
+        res.render('admin/addLoan', {
+            title: '编辑产品',
+            posts: posts,
+            update: true
+        });
+    });
+}
+exports.doUpdateLoan = function (req, res) {
+    var options = {
+        name: req.body.name,
+        imgUrl: req.body.imgUrl,
+        links: req.body.links,
+        limit: req.body.limit,
+        rate: req.body.rate,
+        description: req.body.description
+    };
+    Loan.updateById(req.body.id, options, function (err, posts) {
+        if (err) {
+            return res.send(err);
+        }
+        res.redirect('/admin/loanList');
+    });
+}
 
 

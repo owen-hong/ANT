@@ -1,0 +1,70 @@
+<% include header.html %>
+<div class="widget-box">
+    <div class="widget-title">
+        <span class="icon"> 
+            <i class="icon-th"></i> 
+        </span>
+        <h5></h5>
+    </div>
+    <div class="widget-content nopadding">
+        <table class="table table-bordered table-striped with-check">
+            <thead>
+                <tr>
+                    <th>
+                        <i class="icon-resize-vertical"></i>
+                    </th>
+                    <th>产品名称</th>
+                    <th>图片</th>
+                    <th>网址</th>
+                    <th>可贷金额</th>
+                    <th>利率</th>
+                    <th>描述</th>
+                    <th>创建时间</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% posts.forEach(function(post, index) { %>
+                <tr>
+                    <td>
+                        <%= index+1 %>
+                    </td>
+                    <td>
+                        <%= post.name %>
+                    </td>
+                    <td>
+                        <img src="/<%= post.imgUrl %>" width="50" alt=""/>
+                    </td>
+                    <td>
+                        <%= post.links %>
+                    </td>
+                    <td>
+                        <%= post.limit %>
+                    </td>
+                    <td>
+                        <%= post.rate %>
+                    </td>
+                    <td>
+                        <%= post.description %>
+                    </td>
+                    <td>
+                        <%= locals.moment(post.created).format("YYYY-MM-DD h:mm a") %>
+                    </td>
+                    <td class="center">
+                        <a href="/admin/updateLoan?id=<%= post._id %>" class="btn btn-info">编辑</a>
+                        <a href="/admin/doRemoveLoan?id=<%= post._id %>" onclick="delcfm()" class="btn btn-danger">删除</a>
+                    </td>
+                </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
+    <!-- 分页 -->
+    <div class="dataTables_wrapper">
+        <div class="fg-toolbar ui-toolbar ui-widget-header ui-corner-bl ui-corner-br ui-helper-clearfix" id="pager">
+            <!-- 分页内容 -->
+        </div>
+    </div>
+</div>
+
+<% include footer.html %>

@@ -25,8 +25,10 @@ require('./user');
 require('./adminUser');
 require('./article');
 require('./links');
+require('./loan');
 
 exports.User = mongoose.model('User');
 exports.adminUser = mongoose.model('adminUser');
 exports.Article = mongoose.model('article');
 exports.Links = mongoose.model('Links');
+exports.Loan = mongoose.model('Loan');

@@ -8,45 +8,72 @@ var User = require('../proxy/user.js');
 var Loan = require('../proxy/loan.js');
 var AdminUser = require('../proxy/adminUser.js');
 
-exports.index = function(req,res){
-    console.log(req.session.adminUserName);
+var EditHome = require('../proxy/home.js');
 
-    User.findCount(function (err, count) {
+exports.index = function(req,res){
+    EditHome.findAll('', 0, 10, function (err, posts) {
         if (err) {
             return res.send(err);
         }
+        if (posts == "") {
+            res.render('admin/edit-home', {
+                title: '首页',
+                homeId: '',
+            });
+        } else {
+            if(posts[0].imgUrl == null){
+                var bannerImg = [];
+            }else{
+                var bannerImg = posts[0].imgUrl.split(',');
+            }
 
-        //每页展示数量
-        var listRows = config.listRows;
-        var maxPage = Math.ceil(count / listRows);
-        var currentPage = req.query.page === undefined ? 1 : req.query.page;
-        currentPage = req.query.page == 0 ? 1 : currentPage;
+            res.render('admin/edit-home', {
+                title: '首页',
+                homeId: posts[0]._id,
+                posts:posts[0],
+                banner:bannerImg
+            });
+        }
+    });
+}
 
 
-        //数据开始位置
-        var start = (currentPage - 1) * listRows;
-        User.findAll(start, listRows, function (err, posts) {
+exports.doEditHome = function(req,res){
+    var data = {
+        title: req.body.title,
+        keywords: req.body.keywords,
+        description: req.body.description,
+        imgUrl: req.body.imgUrl,
+        company: req.body.company,
+        about: req.body.about,
+        qq:req.body.qq,
+        phone:req.body.phone,
+        email:req.body.email,
+        wechat:req.body.wechat,
+        address:req.body.address,
+        copyright:req.body.copyright
+    }
+
+
+    if(req.body.homeId==""){
+        //保存数据
+        EditHome.newAndSave(data, function (err, posts) {
             if (err) {
                 return res.send(err);
             }
-
-            //console.log(posts);
-            if (posts == "") {
-                res.render('admin/userList', {
-                    title: '用户列表',
-                    posts: ""
-                });
-            } else {
-                res.render('admin/userList', {
-                    title: '用户列表',
-                    currentPage: currentPage,
-                    maxPage: maxPage,
-                    posts: posts
-                });
-            }
+            res.send("<h2>更新成功！两秒后回到首页！</h2><script>setTimeout(function(){window.location.href='/admin/';},2000);</script>");
         });
-    });
+    }else{
+        EditHome.updateById(req.body.homeId, data, function (err, posts) {
+            if (err) {
+                return res.send(err);
+            }
+            res.send("<h2>更新成功！两秒后回到首页！</h2><script>setTimeout(function(){window.location.href='/admin/';},2000);</script>");
+        });
+    }
 }
+
+
 
 exports.userList = function(req,res){
     User.findCount(function (err, count) {

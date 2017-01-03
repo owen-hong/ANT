@@ -79,6 +79,8 @@ exports.doArtPost = function (req, res) {
         domain : req.body.domain
     }
 
+    console.log(data);
+
     //保存数据
     Article.newAndSave(data, function (err, posts) {
         if (err) {

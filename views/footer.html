@@ -10,9 +10,9 @@
                 <li><a href="/#page_09">联系我们</a></li>
             </ul>
             <ul class="footer_con fr">
-                <li class="phone">手机：<span>13510188260</span></li>
-                <li class="mail">邮箱：<a href="mailto:sywork@qq.com">sywork@qq.com</a></li>
-                <li class="address">地址：深圳市南山区高新园飞亚达科技大厦东座18楼</li>
+                <li class="phone">手机：<span><%= posts.phone %></span></li>
+                <li class="mail">邮箱：<a href="mailto:<%= posts.email %>"><%= posts.email %></a></li>
+                <li class="address">地址：<%= posts.address %></li>
             </ul>
         </div>
 
@@ -26,7 +26,7 @@
                 <% }) %>
             </dl>
         </div>
-        <p class="copyright">Copyright @ 2015-2016 深圳蚁人信息科技有限公司 <a target="_blank" href="http://www.miitbeian.gov.cn" rel="nofollow">粤ICP备16110942号-1
+        <p class="copyright"><%= posts.copyright %> <a target="_blank" href="http://www.miitbeian.gov.cn" rel="nofollow">粤ICP备16110942号-1
             <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1261048939'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s95.cnzz.com/z_stat.php%3Fid%3D1261048939%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));</script>
         </a></p>
     </div>

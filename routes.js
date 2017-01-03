@@ -49,6 +49,7 @@ exports.handle = function (app) {
 
     //admin
     app.get('/admin', Admin.adminIsLoggedIn, Admin.index);
+    app.post('/admin/doEditHome', Admin.adminIsLoggedIn, Admin.doEditHome);
 
 
     //退出后台

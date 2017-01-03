@@ -26,9 +26,11 @@ require('./adminUser');
 require('./article');
 require('./links');
 require('./loan');
+require('./home');
 
 exports.User = mongoose.model('User');
 exports.adminUser = mongoose.model('adminUser');
 exports.Article = mongoose.model('article');
 exports.Links = mongoose.model('Links');
 exports.Loan = mongoose.model('Loan');
+exports.Home = mongoose.model('Home');

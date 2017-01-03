@@ -6,10 +6,9 @@
 	<div class="vSlide">
 		<div class="swiper-container">
 			<div class="swiper-wrapper">
-				<div class="swiper-slide" style="background-image: url(photos/banner-1.jpg)"></div>
-				<div class="swiper-slide" style="background-image: url(photos/banner-2.jpg);"></div>
-				<div class="swiper-slide" style="background-image: url(photos/banner-3.jpg);"></div>
-				<div class="swiper-slide" style="background-image: url(photos/banner-4.jpg);"></div>
+				<% banner.forEach(function(bannerData, index) { %>
+				<div class="swiper-slide" style="background-image: url(/<%= bannerData %>)"></div>
+				<% }) %>
 			</div>
 			<div class="pagination"></div>
 		</div>
@@ -121,8 +120,8 @@
 		<h2 class="tit">公司文化</h2>
 		<h4 class="sub_tit">Company Culture</h4>
 		<div class="row">
-			<p class="text_center info">我们坚持以精湛的互联网技术，提供丰富可靠的营销服务；坚持不断创新模式，提供效果可信的营销服务；</p>
-			<p class="text_center info">为企业提供优秀的互联网效果营销平台，获得更多客户，提高企业营销业绩。</p>
+			<p class="text_center info"><%- posts.company %></p>
+			<!--<p class="text_center info">为企业提供优秀的互联网效果营销平台，获得更多客户，提高企业营销业绩。</p>-->
 
 			<ul class="text_center clearfix">
 				<li>
@@ -162,8 +161,7 @@
 				<img src="images/page6_01.png" alt="" class="img1">
 				<img src="images/page6_02.png" alt="" class="img2">
 			</div>
-			<p class="text_left">深圳蚁人信息科技有限公司简称“蚁人”，是一家专注于互联网金融行业效果营销服务商，公司成立于2015年，聚集资深的互动广告、创意营销、网络技术开发等互联网营销技术专家，结合网络平台大数据资源，以领先的营销理论与技术，提供整合营销策划与推广服务，为客户打造品牌，创造价值。
-				讯、谷歌、360、搜狐、搜狗、爱奇艺、小米、金山、DSP等众多互联网合作平台资源。 </p>
+			<p class="text_left"><%- posts.about %></p>
 		</div>
 	</div>
 	<!--page_06 END-->
@@ -249,11 +247,11 @@
 			<div class="contact_info">
 				<h2>深圳蚁人信息科技有限公司</h2>
 				<ul class="contact_list">
-					<li class="phone">手机：<span>13510188260</span></li>
-					<li class="qq">Q Q：727776820</li>
-					<li class="weixin">微信：13510188260</li>
-					<li class="mail">邮箱：<a href="mailto:sywork@qq.com">sywork@qq.com</a></li>
-					<li class="address">地址：深圳市南山区高新园飞亚达科技大厦东座18楼</li>
+					<li class="phone">手机：<span><%= posts.phone %></span></li>
+					<li class="qq">Q Q：<%= posts.phone %></li>
+					<li class="weixin">微信：<%= posts.wechat %></li>
+					<li class="mail">邮箱：<a href="mailto:<%= posts.email %>"><%= posts.email %></a></li>
+					<li class="address">地址：<%= posts.address %></li>
 				</ul>
 			</div>
 			<div class="ditu"></div>

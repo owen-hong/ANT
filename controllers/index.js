@@ -21,6 +21,7 @@ var Links = require('../proxy/links.js');
 var redis = new Redis();
 
 var User = require('../proxy/user.js');
+var EditHome = require('../proxy/home.js');
 
 
 //公共头尾数据输出
@@ -38,8 +39,28 @@ exports.global = function (req, res, next) {
 
 
 exports.index = function(req,res){
-    res.render('index',{
-        title:'',
+    EditHome.findAll('', 0, 10, function (err, posts) {
+        if (err) {
+            return res.send(err);
+        }
+        if (posts == "") {
+            res.render('index', {
+                title: '首页',
+                homeId: '',
+            });
+        } else {
+            if(posts[0].imgUrl == null){
+                var bannerImg = [];
+            }else{
+                var bannerImg = posts[0].imgUrl.split(',');
+            }
+
+            res.render('index', {
+                title: '首页',
+                posts:posts[0],
+                banner:bannerImg
+            });
+        }
     });
 };
 

@@ -47,6 +47,7 @@ exports.index = function(req,res){
             res.render('index', {
                 title: '首页',
                 homeId: '',
+                banner:[]
             });
         } else {
             if(posts[0].imgUrl == null){

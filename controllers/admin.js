@@ -19,6 +19,8 @@ exports.index = function(req,res){
             res.render('admin/edit-home', {
                 title: '首页',
                 homeId: '',
+                posts:'',
+                banner:[]
             });
         } else {
             if(posts[0].imgUrl == null){
@@ -232,10 +234,10 @@ exports.adminIsLoggedIn = function(req,res,next){
     if(req.session.adminUserName){
         if(req.session.adminUserWeight == "2"){
             console.log('weight:2');
-            if(req.url == '/admin/adminChannelList' || req.url == '/admin/adminChannelList/'){
+            if(req.url == '/admin' || req.url == '/admin/'){
                 next();
             }else{
-                res.redirect('/admin/adminChannelList');
+                res.redirect('/admin');
             }
         }else{
             console.log('weight:0')

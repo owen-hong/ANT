@@ -45,7 +45,7 @@ exports.article = function (req, res) {
                 });
             } else {
                 res.render('admin/article', {
-                    title: '首页',
+                    title: '文章首页',
                     currentPage: currentPage,
                     maxPage: maxPage,
                     posts: posts,

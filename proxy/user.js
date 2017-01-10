@@ -10,6 +10,12 @@ var OneSelf    = models.User;
 //find all
 exports.findAll = function (start,listRows,callback) {
     OneSelf
+        //.find({
+        //    created:{
+        //        "$gte": new Date('2014-01-24'),
+        //        "$lte":new Date('2014-01-25')
+        //    }
+        //})
         .find()
         .sort('-created')
         .limit(listRows)

@@ -10,7 +10,9 @@ var logger = require('../common/logger');
 
 mongoose.Promise = require('bluebird'); //��ֹES6�﷨���־���
 mongoose.connect(config.db, {
-    server: {poolSize: 20}
+    server: {poolSize: 20},
+    user: 'admin',
+    pass: 'Owenhong136..'
 }, function (err) {
     if (err) {
         logger.error('connect to %s error: ', config.db, err.message);
